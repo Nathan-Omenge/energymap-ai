@@ -1,0 +1,146 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.app-wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+}
+
+.sidebar {
+  width: 320px;
+  background: #0b0b0b;
+  color: white;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.map-section {
+  flex: 1;
+  position: relative;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+/* Buttons */
+button {
+  margin: 0.5rem 0;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #3ddc84;
+  color: #000;
+}
+
+.btn-secondary {
+  background-color: #444;
+  color: #fff;
+}
+
+.btn-toggle {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Legend styles */
+.legend-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+.btn-about {
+  background-color: #222;
+  color: #3ddc84;
+  border: 1px solid #3ddc84;
+  transition: 0.2s;
+}
+
+.btn-about:hover {
+  background-color: #3ddc84;
+  color: #000;
+}
+
+.about-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.about-content {
+  background: #111;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 600px;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.about-content h3 {
+  color: #3ddc84;
+  margin-top: 0;
+}
+
+.about-content ul {
+  padding-left: 1.2rem;
+}
+
+.about-content li {
+  margin-bottom: 0.4rem;
+}
+
+.about-content button {
+  margin-top: 1rem;
+}
+
+.btn-formula {
+  background-color: #3ddc84;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-formula:hover {
+  background-color: #5cf3a0;
+}
+
+.formula-box {
+  margin-top: 10px;
+  background: #111;
+  border: 1px solid #3ddc84;
+  border-radius: 10px;
+  padding: 12px;
+}
