@@ -42,3 +42,7 @@ data_processed/*.geojson
 *.egg-info/
 dist/
 build/
+
+
+data_raw/*.geojson
+data_processed/*.parquet
