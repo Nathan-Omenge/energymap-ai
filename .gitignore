@@ -1,5 +1,12 @@
+# Ignore Jupyter and VSCode cache files
+notebooks/cache/
+__pycache__/
+*.ipynb_checkpoints
+.DS_Store
+
 # macOS system files
 .DS_Store
+Thumbs.db
 
 # Python cache
 __pycache__/
@@ -11,6 +18,7 @@ venv_energymap/
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/
+*.ipynb_save
 
 # Raster and large data artifacts
 *.tif
@@ -18,3 +26,19 @@ venv_energymap/
 
 # Temporary files
 *.log
+
+# VS Code workspace settings
+.vscode/
+
+# Environment files
+.env
+*.env
+
+# Generated or processed data
+data_processed/*.csv
+data_processed/*.geojson
+
+# Python packaging and build folders
+*.egg-info/
+dist/
+build/
