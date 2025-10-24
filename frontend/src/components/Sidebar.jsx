@@ -1,6 +1,25 @@
 import React, { useState } from "react";
 
-const Sidebar = ({ clusters, onShowTop5, onReset, onToggleView, viewMode }) => {
+const numberFormat = new Intl.NumberFormat("en-US", {
+  maximumFractionDigits: 1,
+});
+
+const currencyFormat = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
+
+const Sidebar = ({
+  clusters,
+  onShowTop5,
+  onReset,
+  onToggleView,
+  viewMode,
+  summary,
+  demandStats,
+  scenarios,
+}) => {
   const [showAbout, setShowAbout] = useState(false);
   const [showFormula, setShowFormula] = useState(false);
 
@@ -47,6 +66,65 @@ const Sidebar = ({ clusters, onShowTop5, onReset, onToggleView, viewMode }) => {
           </ul>
         )}
       </div>
+
+      {summary && (
+        <div className="summary-box">
+          <h4>System Snapshot</h4>
+          <p>Total clusters processed: {summary.clusters || clusters.length}</p>
+          {summary.baseline_demand_mwh_year && (
+            <p>
+              Baseline demand: {numberFormat.format(summary.baseline_demand_mwh_year)} MWh
+            </p>
+          )}
+          {summary.demand_2030_mwh_year && (
+            <p>
+              2030 demand: {numberFormat.format(summary.demand_2030_mwh_year)} MWh
+            </p>
+          )}
+          {summary.peak_2030_kw && (
+            <p>
+              Peak 2030 load: {numberFormat.format(summary.peak_2030_kw)} kW
+            </p>
+          )}
+        </div>
+      )}
+
+      {demandStats?.topConsumers?.length ? (
+        <div className="summary-box">
+          <h4>Top Demand Clusters</h4>
+          <ul className="demand-list">
+            {demandStats.topConsumers.map((item) => (
+              <li key={item.id}>
+                <span>#{item.id}</span>
+                <span>{numberFormat.format(item.baseline)} → {numberFormat.format(item.future)} MWh</span>
+                <small>{item.solution}</small>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      {scenarios?.length ? (
+        <div className="summary-box">
+          <h4>Scenario Highlights</h4>
+          <ul className="scenario-list">
+            {scenarios.map((scenario) => (
+              <li key={scenario.name}>
+                <b>{scenario.name}</b>
+                <div>
+                  {numberFormat.format(scenario.people)} people electrified
+                </div>
+                <div>
+                  Demand Δ {numberFormat.format(scenario.demand)} MWh
+                </div>
+                <div>
+                  Cost {currencyFormat.format(scenario.cost || 0)}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       {/* --- About Modal --- */}
       {showAbout && (

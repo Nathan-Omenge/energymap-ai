@@ -1,0 +1,7 @@
+{
+  "clusters": 20,
+  "baseline_demand_mwh_year": 17044.026123518957,
+  "baseline_peak_kw": 6485.550275311625,
+  "demand_2030_mwh_year": 26244.98396191918,
+  "peak_2030_kw": 9986.67578459634
+}

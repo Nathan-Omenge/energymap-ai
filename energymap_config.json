@@ -1,0 +1,121 @@
+{
+  "project": {
+    "name": "EnergyMap.AI",
+    "country": "Kenya",
+    "crs": "EPSG:4326"
+  },
+  "paths": {
+    "raw_data_dir": "data_raw",
+    "processed_data_dir": "data_processed",
+    "frontend_data_dir": "frontend/public/data",
+    "scoring_input": "data_processed/clusters_scored_v2.geojson",
+    "scoring_output_geojson": "frontend/public/data/clusters_enriched.geojson",
+    "scoring_output_csv": "frontend/public/data/clusters_enriched_summary.csv",
+    "demand_output_geojson": "frontend/public/data/demand_forecasts.geojson",
+    "demand_output_csv": "frontend/public/data/demand_forecasts.csv",
+    "scenario_output_dir": "frontend/public/data/scenarios",
+    "scenario_comparison_csv": "frontend/public/data/scenarios/scenario_comparison.csv",
+    "summary_stats_json": "frontend/public/data/summary_metrics.json"
+  },
+  "scoring": {
+    "weights": {
+      "population": 0.3,
+      "access_gap": 0.25,
+      "economic_activity": 0.2,
+      "social_need": 0.15,
+      "grid_proximity": 0.1
+    },
+    "thresholds": {
+      "high_priority": 7.0,
+      "medium_priority": 5.0
+    },
+    "fallback_fields": {
+      "population": [
+        "norm_pop",
+        "pop_index"
+      ],
+      "access_gap": [
+        "grid_norm",
+        "power_norm"
+      ],
+      "economic": [
+        "total_road_km",
+        "norm_road_km"
+      ],
+      "social": [
+        "need_level_weight",
+        "Need_Level"
+      ],
+      "grid_distance": [
+        "dist_to_power_km"
+      ]
+    },
+    "recommendation_rules": {
+      "grid_extension": {
+        "max_distance_km": 5,
+        "min_population_index": 0.6
+      },
+      "mini_grid_hybrid": {
+        "max_distance_km": 15,
+        "min_population_index": 0.3,
+        "min_road_density": 0.5
+      },
+      "standalone_solar": {
+        "min_distance_km": 25,
+        "max_population_index": 0.2
+      }
+    },
+    "population_scale": 5000
+  },
+  "demand_forecasting": {
+    "baseline_consumption_kwh_per_person": 500,
+    "load_factor": 0.3,
+    "population_growth": {
+      "urban_density_threshold": 100,
+      "peri_urban_density_threshold": 50,
+      "urban_rate": 0.035,
+      "peri_urban_rate": 0.025,
+      "rural_rate": 0.015
+    },
+    "electrification_target_rate": 0.8,
+    "consumption_growth_rate": 0.025
+  },
+  "scenarios": {
+    "default_scenarios": [
+      {
+        "name": "Grid Extension - Top 20 Priority",
+        "description": "Grid Extension - Top 20 Priority",
+        "interventions": [
+          {
+            "type": "grid_extension",
+            "target": "top_priority",
+            "count": 20
+          }
+        ]
+      },
+      {
+        "name": "Mini-Grid Deployment",
+        "description": "Mini-Grid Deployment",
+        "interventions": [
+          {
+            "type": "mini_grid_deployment",
+            "count": 30
+          }
+        ]
+      },
+      {
+        "name": "2030 Population Growth",
+        "description": "2030 Population Growth",
+        "interventions": [
+          {
+            "type": "population_growth",
+            "rate": 0.1,
+            "regions": [
+              "all"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

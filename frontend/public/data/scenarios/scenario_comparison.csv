@@ -1,0 +1,4 @@
+people_electrified,settlements_connected,demand_increase_mwh,cost_usd,electrification_rate,scenario_name,description,generated_at
+4651.149166269305,2.0,8522.013061759473,12777653.049999999,1.0,Grid Extension - Top 20 Priority,Grid Extension - Top 20 Priority,2025-10-24T14:39:39.404976
+4651.149166269305,2.0,4250.886918459848,12777653.049999999,1.0,Mini-Grid Deployment,Mini-Grid Deployment,2025-10-24T14:39:39.410890
+0.0,0.0,1704.4026123518925,12777653.049999999,0.9,2030 Population Growth,2030 Population Growth,2025-10-24T14:39:39.414688

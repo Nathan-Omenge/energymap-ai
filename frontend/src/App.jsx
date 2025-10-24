@@ -1,50 +1,21 @@
-import React, { useEffect, useState } from "react";
-import Sidebar from "./components/Sidebar.jsx";
-import MapView from "./components/MapView.jsx";
-import "./index.css";
+import { Navigate, Route, Routes, BrowserRouter } from "react-router-dom";
+import Layout from "./layout/Layout.jsx";
+import PriorityMapPage from "./pages/PriorityMapPage.jsx";
+import DemandForecastPage from "./pages/DemandForecastPage.jsx";
+import ScenarioSimulatorPage from "./pages/ScenarioSimulatorPage.jsx";
 
 const App = () => {
-  const [clusters, setClusters] = useState([]);
-  const [viewMode, setViewMode] = useState("score");
-  const [allClusters, setAllClusters] = useState([]);
-
-  useEffect(() => {
-    fetch("/data/clusters_scored_v2.geojson")
-      .then((res) => res.json())
-      .then((data) => {
-        setClusters(data.features);
-        setAllClusters(data.features);
-      })
-      .catch((err) => console.error("Error loading GeoJSON:", err));
-  }, []);
-
-  const handleShowTop5 = () => {
-    const top5 = [...allClusters]
-      .sort((a, b) => b.properties.Score - a.properties.Score)
-      .slice(0, 5);
-    setClusters(top5);
-  };
-
-  const handleReset = () => setClusters(allClusters);
-  const handleToggleView = () =>
-    setViewMode(viewMode === "score" ? "recommendation" : "score");
-
   return (
-    <div className="app-wrapper">
-      <aside className="sidebar">
-        <Sidebar
-          clusters={clusters}
-          onShowTop5={handleShowTop5}
-          onReset={handleReset}
-          onToggleView={handleToggleView}
-          viewMode={viewMode}
-        />
-      </aside>
-
-      <main className="map-section">
-        <MapView clusters={clusters} viewMode={viewMode} />
-      </main>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<PriorityMapPage />} />
+          <Route path="demand" element={<DemandForecastPage />} />
+          <Route path="scenarios" element={<ScenarioSimulatorPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 

@@ -38,19 +38,25 @@ const MapView = ({ clusters, viewMode }) => {
       const coords = feature.geometry?.coordinates;
       if (!coords) return;
 
-      const score = props.Score || 0;
+      const rawScore =
+        props.priority_score ??
+        props.Score ??
+        props.energy_need_score ??
+        0;
       const rec =
         props.Recommendation ||
         props.recommendation ||
         ""; // removed "Unknown"
 
+      const displayScore = rawScore <= 10 ? rawScore * 10 : rawScore;
+
       const color =
         viewMode === "recommendation"
           ? getColorByRecommendation(rec)
-          : getColorByScore(score);
+          : getColorByScore(displayScore);
 
       const circle = L.circleMarker([coords[1], coords[0]], {
-        radius: getRadius(score),
+        radius: getRadius(displayScore),
         fillColor: color,
         color: "#555",
         weight: 1,
@@ -59,7 +65,7 @@ const MapView = ({ clusters, viewMode }) => {
         .addTo(map)
         .bindPopup(
           `<b>Cluster ${props.cluster_id}</b><br>
-           Score: ${score.toFixed(2)}<br>
+           Score: ${displayScore.toFixed(1)}<br>
            ${
              rec
                ? `Recommendation: <b style="color:#3ddc84">${rec}</b>`
