@@ -112,45 +112,6 @@ button {
   color: #fff;
 }
 
-.control-row {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.county-simulation {
-  background: #111;
-  border: 1px solid rgba(61, 220, 132, 0.2);
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-}
-
-.county-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.county-pill {
-  background: rgba(61, 220, 132, 0.12);
-  border: 1px solid rgba(61, 220, 132, 0.4);
-  border-radius: 999px;
-  color: #f5f5f5;
-  padding: 0.5rem 0.9rem;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
-.county-pill:hover {
-  background: rgba(61, 220, 132, 0.22);
-}
-
-.county-pill-active {
-  background: rgba(220, 61, 61, 0.35);
-  border-color: rgba(220, 61, 61, 0.6);
-}
-
 .line-chart {
   display: flex;
   flex-direction: column;

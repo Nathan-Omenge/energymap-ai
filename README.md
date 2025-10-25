@@ -68,4 +68,3 @@ npm run dev
 - **Release notes & architecture guide**: see `docs/README.md` for a detailed description of the upgraded pipeline, API, and front-end features, plus step-by-step setup instructions.
 
 ## License
-

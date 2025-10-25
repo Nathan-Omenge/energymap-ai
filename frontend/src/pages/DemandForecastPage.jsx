@@ -6,28 +6,7 @@ const DemandForecastPage = () => {
   const [bySettlement, setBySettlement] = useState([]);
   const [topConsumers, setTopConsumers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showCountyPicker, setShowCountyPicker] = useState(false);
   const apiBase = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
-  const simulatedCounties = useMemo(() => {
-    return [
-      "Nairobi",
-      "Mombasa",
-      "Kisumu",
-      "Nakuru",
-      "Uasin Gishu",
-      "Machakos",
-      "Kiambu",
-      "Kakamega",
-      "Nyeri",
-      "Meru",
-      "Kisii",
-      "Garissa",
-      "Turkana",
-      "Bungoma",
-      "Kericho",
-      "Laikipia",
-    ];
-  }, []);
   const categorizeSettlement = (population) => {
     if (typeof population !== "number") return "Rural";
     if (population >= 4000) return "Urban";
@@ -240,8 +219,6 @@ const DemandForecastPage = () => {
       ? value.toLocaleString("en-US", { maximumFractionDigits: decimals })
       : "-";
 
-  const handleCountyToggle = () => setShowCountyPicker((prev) => !prev);
-
   return (
     <div className="page-container">
       <header className="page-header">
@@ -251,33 +228,6 @@ const DemandForecastPage = () => {
           electrification targets, and economic development assumptions drawn from
           the pipeline configuration.
         </p>
-        <div className="control-row">
-          <button
-            type="button"
-            className="btn-secondary"
-            onClick={handleCountyToggle}
-            aria-expanded={showCountyPicker}
-          >
-            {showCountyPicker ? "Hide Kenya Regions" : "Select Regions in Kenya"}
-          </button>
-          {showCountyPicker && (
-            <div className="county-simulation" role="region" aria-label="Simulated Kenyan counties">
-              <div className="county-grid">
-                {simulatedCounties.map((county) => (
-                  <button
-                    type="button"
-                    key={county}
-                    className={`county-pill${
-                      county === "Nairobi" ? " county-pill-active" : ""
-                    }`}
-                  >
-                    {county}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
       </header>
 
       <section className="card-grid">
